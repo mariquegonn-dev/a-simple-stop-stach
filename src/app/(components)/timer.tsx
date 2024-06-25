@@ -59,8 +59,8 @@ export const Timer = () => {
     return `${hours}:${minutes}:${seconds}:${milliseconds}`;
   }
   return (
-    <div className="text-gray-50 mx-auto flex items-center flex-col gap-5 mt-20">
-      <h1 className="sm:-ml-10 ml-20 text-[2.5rem] sm:text-[4rem] w-[300px] p-1">
+    <div className="bg-white/10 h-[250px] w-[680px] p-6 rounded-lg text-gray-50 mx-auto flex items-center flex-col gap-5 mt-20">
+      <h1 className="text-[2.5rem] sm:text-[5rem] max-w-[680px] h-[100px] font-mono">
         {formatTimer()}
       </h1>
       <div className="flex gap-5 items-center">
@@ -69,7 +69,7 @@ export const Timer = () => {
             <button onClick={stopTimer}>
               <PauseCircle
                 weight="fill"
-                className="text-blue-600 hover:scale-110 transition-all sm:text-6xl text-4xl"
+                className="text-white hover:scale-110 transition-all sm:text-6xl text-4xl"
               />
             </button>
             <button
@@ -81,29 +81,34 @@ export const Timer = () => {
             </button>
           </>
         ) : (
-          <button onClick={startTimer}>
-            <PlayCircle
-              weight="fill"
-              className="text-blue-600 hover:scale-110 transition-all sm:text-6xl text-4xl"
-            />
+          <button
+            onClick={startTimer}
+            className="border-b-4 active:h-[50px] active:mt-[5px] active:border-b-0 border-gray-300 font-semibold items-center w-[200px] text-2xl h-[55px] rounded-md justify-center flex bg-white text-[rgb(57,_112,_151)]"
+          >
+            START
           </button>
         )}
 
-        <button onClick={resetTimer} disabled={time === 0}>
-          <ArrowCounterClockwise
-            weight="fill"
-            className={cn(
-              "hover:scale-110 transition-all sm:text-6xl text-4xl",
-              time === 0 && "cursor-not-allowed opacity-50"
-            )}
-          />
-        </button>
+        {isRunning && (
+          <button onClick={resetTimer} disabled={time === 0}>
+            <ArrowCounterClockwise
+              weight="fill"
+              className={cn(
+                "hover:scale-110 transition-all sm:text-6xl text-4xl",
+                time === 0 && "cursor-not-allowed opacity-50"
+              )}
+            />
+          </button>
+        )}
       </div>
       {flag.length > 0 && (
-        <ul className="flex flex-col gap-2 mt-5">
+        <ul className="flex flex-col gap-2 mt-10 w-[680px]">
           {flag.map((item, index) => (
-            <li key={item.toString()} className="flex gap-10">
-              <span>{index + 1}</span>
+            <li
+              key={item.toString()}
+              className="flex gap-10 justify-between text-xl"
+            >
+              <span>Posição {index + 1}</span>
               {item}
             </li>
           ))}
